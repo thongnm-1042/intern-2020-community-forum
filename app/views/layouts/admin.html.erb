@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t ".title" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "admin/admin", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "admin/admin", "data-turbolinks-track": "reload" %>
+  </head>
+  <body>
+    <%= link_to t(".english"), locale:"en" %>
+    <%= link_to t(".vietnam"), locale:"vi" %>
+    <%= yield %>
+  </body>
+</html>
