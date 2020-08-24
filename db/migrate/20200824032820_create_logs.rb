@@ -1,6 +1,6 @@
-class Logs < ActiveRecord::Migration[6.0]
+class CreateLogs < ActiveRecord::Migration[6.0]
   def change
-    create_table :roles do |t|
+    create_table :logs do |t|
       t.string :content
       t.references :user, null: false, foreign_key: true
 
