@@ -7,10 +7,10 @@ stages:
 jobs:
 - name: build:prepare
   stage: build
-  image: sunci/ruby:2.5.1
+  image: sunci/ruby:2.7.0
   script:
   - cp database-ci.yml config/database.yml
-  - bundle _2.1.4_ install --path vendor/bundle
+  - bundle _2.1.2_ install --path vendor/bundle
   cache:
   - key: vendor_$CI_BRANCH
     paths:
@@ -18,30 +18,40 @@ jobs:
 
 - name: test:rspec
   stage: test
-  image: sunci/ruby:2.5.1
+  image: sunci/ruby:2.7.0
   services:
-  - redis:alpine
-  - image: postgres:12-alpine
-    name: postgresql
+  - image: mysql:5.7.22
+    name: mysql
     environment:
-    - POSTGRES_DB=xxx
-    - POSTGRES_USER=xxx
-    - POSTGRES_PASSWORD=secret
+      MYSQL_DATABASE: Community_Forum_Test
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_password
+      MYSQL_ROOT_PASSWORD: root
   before_script:
-  - bundle _2.1.4_ install --path vendor/bundle
+  - bundle _2.1.2_ install --path vendor/bundle
   script:
-  - bundle _2.1.4_ exec rspec
-  only:
-    branches:
-    - milestone1
+  - bundle _2.1.2_ exec rspec
 
 - name: test:bundle_audit
   stage: test
-  image: sunci/ruby:2.5.1
+  image: sunci/ruby:2.7.0
   before_script:
-  - bundle _2.1.4_ install --path vendor/bundle
+  - bundle _2.1.2_ install --path vendor/bundle
   script:
-  - bundle-audit check --update
-  only:
-    branches:
-    - milestone1
+  - bundle exec bundle audit check --update
+
+- name: test:rubocop
+  stage: test
+  image: sunci/ruby:2.7.0
+  before_script:
+  - bundle _2.1.2_ install --path vendor/bundle
+  script:
+  - bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --format RuboCop::Formatter::CheckstyleFormatter --no-color --out .framgia-ci-reports/rubocop.xml app/ lib/
+
+- name: test:rails_best_practice
+  stage: test
+  image: sunci/ruby:2.7.0
+  before_script:
+  - bundle _2.1.2_ install --path vendor/bundle
+  script:
+  - bundle exec rails_best_practices -e "db/schema.rb,db/migrate,vendor,app/models/application_record.rb" app/ lib/ -c .rails_best_practices.yml
