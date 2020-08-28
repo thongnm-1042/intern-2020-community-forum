@@ -8,9 +8,7 @@ class Admin::UsersController < AdminController
     @users = User.page(params[:page]).per Settings.user.per_page
   end
 
-  def show
-    @user
-  end
+  def show; end
 
   def new
     @user = User.new
