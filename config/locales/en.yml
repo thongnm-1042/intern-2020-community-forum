@@ -228,3 +228,7 @@ en:
     edit:
       post_image: "Post Image"
       remove_post: "Remove image"
+  block_mailer:
+    blocked_email:
+      block: "Block"
+      unblock: "Active"

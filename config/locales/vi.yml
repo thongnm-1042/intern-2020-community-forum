@@ -225,3 +225,7 @@ vi:
     edit:
       post_image: "Ảnh bài viết"
       remove_post: "Xóa ảnh"
+  block_mailer:
+    blocked_email:
+      block: "Khóa tài khoản"
+      unblock: "Mở tài khoản"
