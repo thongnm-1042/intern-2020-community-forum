@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get "/login", to: "sessions#new"
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"
+      patch "users/activate/:id", to: "block#update", as: "user_activate"
       resources :users
       resources :posts
       resources :topics
