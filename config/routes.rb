@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"
       patch "users/activate/:id", to: "block#update", as: "user_activate"
+      patch "topics/activate/:id", to: "topics#activate", as: "topic_activate"
       resources :users
       resources :posts
       resources :topics
