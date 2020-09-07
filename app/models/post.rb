@@ -9,6 +9,8 @@ class Post < ApplicationRecord
     tags_attributes: [:id, :name, :_destroy].freeze
   ].freeze
 
+  include Filterable
+
   belongs_to :user
   belongs_to :topic
 
@@ -27,6 +29,11 @@ class Post < ApplicationRecord
   validates :topic_id, presence: true
 
   scope :order_created_at, ->{order created_at: :desc}
+  scope :order_created_at, ->{order created_at: :desc}
+  scope :filter_title, ->(title){where("title like ?", "#{title}%")}
+  scope :filter_status, ->(status){where status: status}
+  scope :filter_user_id, ->(user_id){where user_id: user_id}
+  scope :filter_topic_id, ->(topic_id){where topic_id: topic_id}
 
   enum status: {off: 0, on: 1}
 

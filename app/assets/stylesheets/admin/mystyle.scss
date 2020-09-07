@@ -1,4 +1,18 @@
+@import 'colors';
+
 .status {
-  color: white;
+  color: $white;
   padding: 5px 5px;
+}
+
+.post-img{
+  height: 300px;
+  width: 300px;
+}
+
+.post-contents{
+  display: block;
+  padding: 10px 10px;
+  border-radius: 4px;
+  background-color: $gray;
 }

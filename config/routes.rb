@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       patch "users/activate/:id", to: "block#update", as: "user_activate"
       patch "topics/activate/:id", to: "topics#activate", as: "topic_activate"
       patch "users/authorize/:id", to: "block#authorize", as: "user_authorize"
+      patch "posts/activate/:id", to: "posts#activate", as: "post_activate"
+      get "posts/filter", to: "posts#filter", as: "post_filter"
       resources :users
       resources :posts
       resources :topics

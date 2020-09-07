@@ -1,8 +1,10 @@
 class Admin::PostsController < AdminController
   before_action :logged_in_user
   before_action :admin_user
-  before_action :load_post, except: %i(index new create)
+  before_action :load_post, except: %i(index new create filter)
   before_action :correct_writer, only: %i(edit update)
+
+  include PostsHelper
 
   add_breadcrumb I18n.t("posts.breadcrumbs.post"), :admin_posts_path
 
@@ -48,6 +50,23 @@ class Admin::PostsController < AdminController
       flash[:success] = t "post.controller.deleted_success"
     else
       flash.now[:danger] = t "post.controller.deleted_error"
+    end
+    redirect_to admin_posts_path
+  end
+
+  def filter
+    add_breadcrumb I18n.t("posts.breadcrumbs.search")
+    @posts = Post.filter params.slice(:user_id, :status, :topic_id, :title)
+    @posts = @posts.page(params[:page]).per Settings.post.page
+  end
+
+  def activate
+    if @post.on?
+      flash[:success] = t "topic.controller.activate_success"
+      @post.off!
+    else
+      flash.now[:danger] = t "topic.controller.activate_error"
+      @post.on!
     end
     redirect_to admin_posts_path
   end

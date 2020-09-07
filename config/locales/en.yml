@@ -62,6 +62,8 @@ en:
     error_messages:
       error: Error
   posts:
+    filter:
+      title: "Title..."
     new:
       new_post: New Post
       posts: Posts
@@ -90,6 +92,7 @@ en:
       post: "Posts"
       new: "New"
       edit: "Edit"
+      search: "Search"
     show:
       posts: Posts
       show: Show

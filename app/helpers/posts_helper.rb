@@ -20,4 +20,12 @@ module PostsHelper
   def post_topic
     @post.topic.present? ? @post.topic.name : true
   end
+
+  def get_all_user
+    User.all
+  end
+
+  def get_all_topic
+    Topic.all
+  end
 end
