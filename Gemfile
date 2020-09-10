@@ -35,6 +35,7 @@ gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
 
 group :development, :test do
+  gem "bullet"
   gem "bundle-audit"
   gem "rails_best_practices"
   gem "rspec-rails", "~> 4.0.1"
