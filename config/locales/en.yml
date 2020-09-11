@@ -113,6 +113,9 @@ en:
       views: View
       comments: Comments
   dashboard:
+    char:
+      post: "Post Chart"
+      user: "User Chart"
     sidebar:
       title: "AdminLTE 3"
       name: "Minh Thong"

@@ -113,6 +113,9 @@ vi:
       views: Lượt xem
       comments: Bình luận
   dashboard:
+    char:
+      post: "Biểu đồ bài viết"
+      user: "Biểu đồ người dùng"
     sidebar:
       title: "AdminLTE 3"
       name: "Minh Thong"
