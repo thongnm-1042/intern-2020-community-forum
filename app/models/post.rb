@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_many :notifications, dependent: :destroy
 
-  after_commit :notify
+  after_commit :notify, on: %i(create update)
 
   has_many :post_marks, dependent: :destroy, counter_cache: true
   has_many :mark_users, through: :post_marks, source: :user
