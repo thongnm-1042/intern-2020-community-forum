@@ -30,7 +30,6 @@ gem "kaminari"
 gem "mini_magick"
 gem "mysql2"
 gem "popper_js", "~> 1.16"
-gem "pry-rails", group: :development
 gem "public_activity"
 gem "puma", "~> 4.1"
 gem "rails", "~> 6.0.3", ">= 6.0.3.2"
