@@ -18,7 +18,9 @@ class UsersController < ApplicationController
                   .order_created_at
                   .by_title(params[:name])
                   .by_topic_id(params[:select_type])
-                  .by_status params[:status]
+                  .by_status(params[:status])
+                  .page(params[:page])
+                  .per Settings.posts.per_page
   end
 
   def edit; end

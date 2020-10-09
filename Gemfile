@@ -55,6 +55,8 @@ group :development, :test do
   gem "rubocop", "~> 0.74.0", require: false
   gem "rubocop-checkstyle_formatter", require: false
   gem "rubocop-rails", "~> 2.3.2", require: false
+  gem "simplecov", require: false
+  gem "simplecov-rcov"
 end
 
 group :development do
@@ -69,7 +71,6 @@ group :test do
   gem "database_cleaner-active_record"
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 4.0"
-  gem "simplecov", require: false
   gem "webdrivers"
 end
 
