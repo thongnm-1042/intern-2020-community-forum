@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!
 
+  authorize_resource Post
+
   def home
     user_ids = current_user.following_ids << current_user.id
     topic_ids = current_user.topic_ids
