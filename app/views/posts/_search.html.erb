@@ -1,0 +1,52 @@
+<div class="search-bar mb-3">
+  <%= search_form_for @q, url: path,
+    class: "form-row", method: :get, local: true do |f|%>
+    <div class="col-md-6">
+      <%= f.label :post_cont, t(".title_or_name") %>
+      <%= f.text_field :post_cont, placeholder: t(".type_sth"), class: "form-control", value: params.dig(:q, :post_cont) %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :topic_id_eq, t(".topics") %>
+      <%= f.select :topic_id_eq, options_for_select(load_select_search_type,
+        params.dig(:q, :topic_id_eq)), {include_blank: t(".topics")},
+        class: "form-control" %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :status_eq, t(".status") %>
+      <%= f.select :status_eq, options_for_select(load_select_search_status,
+        params.dig(:q, :status_eq)), {include_blank: t(".status")},
+        class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :created_at_gteq, t(".from") %>
+      <%= f.date_field :created_at_gteq, class: "form-control",
+        value: params.dig(:q, :created_at_gteq) %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :created_at_lteq, t(".to") %>
+      <%= f.date_field :created_at_lteq, class: "form-control",
+        value: params.dig(:q, :created_at_lteq) %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :updated_at_date_equals, t(".updated_at") %>
+      <%= f.search_field :updated_at_date_equals, class: "form-control",
+        value: params.dig(:q, :updated_at_date_equals) %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :user_name_cont, t(".author") %>
+      <%= f.text_field :user_name_cont, placeholder: t(".type_sth"), class: "form-control", value: params.dig(:q, :user_name_cont) %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :button, class: "text-white" %>
+      <%= button_tag class: "btn btn-info" do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :button, class: "text-white" %>
+      <%= link_to request.path, class: "btn btn-secondary" do %>
+        <i class="fas fa-sync-alt"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -51,9 +51,7 @@ module ApplicationHelper
 
   def load_select_search_status
     if action_name.eql?("show") || controller_name.eql?("favorites")
-      Post.statuses.keys.map do |key|
-        [t(key.to_s), key]
-      end
+      Post.statuses.map{|key, value| [t(key.to_s), value]}
     elsif action_name.eql? "index"
       [[t(".follow"), :on], [t(".unfollow"), :off]]
     end

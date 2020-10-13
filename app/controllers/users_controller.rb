@@ -15,14 +15,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts
-                  .includes(:topic, :tags)
-                  .order_created_at
-                  .by_title(params[:name])
-                  .by_topic_id(params[:select_type])
-                  .by_status(params[:status])
-                  .page(params[:page])
-                  .per Settings.posts.per_page
+    @q = @user.posts.ransack params[:q].try(:merge, m: "or")
+
+    @posts = @q.result.includes(:topic, :tags)
+               .order_created_at
+               .page(params[:page])
+               .per Settings.topics.per_page
   end
 
   def edit; end

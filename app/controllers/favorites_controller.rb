@@ -1,14 +1,12 @@
 class FavoritesController < ApplicationController
   authorize_resource Post
 
-  before_action :authenticate_user!, :find_user, :correct_user, only: :index
+  before_action :authenticate_user!
+  before_action :find_user, :correct_user, only: :index
 
   def index
-    @posts = current_user.mark_posts
-                         .order_mark_posts
-                         .includes(:user, :topic, :tags)
-                         .by_title(params[:name])
-                         .by_topic_id(params[:select_type])
-                         .by_status params[:status]
+    @q = current_user.mark_posts.ransack params[:q].try(:merge, m: "or")
+    @posts = @q.result.includes(:user, :topic, :tags)
+               .order_mark_posts
   end
 end

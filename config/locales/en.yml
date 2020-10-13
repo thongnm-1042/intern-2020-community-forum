@@ -79,6 +79,8 @@ en:
       status: Status
       type_sth: Type something here
   posts:
+    search:
+      type_sth: Type something here
     filter:
       title: "Title..."
       date: "Please take a date"
@@ -192,6 +194,8 @@ en:
       email: "Email"
       password: "Password"
   users:
+    search:
+      type_sth: Type something here
     filter:
       post_count: "Please give a value"
     user:
