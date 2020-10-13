@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!
 
+  authorize_resource Post
+
   def home
     @posts = Post.includes(Post::POST_INCLUDES)
                  .in_homepage(current_user).sort_by(&:post_score).reverse!
