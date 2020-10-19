@@ -16,8 +16,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     Settings.config_image.image
   end
-
-  def default_url
-    "/img/" + [version_name, "avatar.png"].compact.join("_")
-  end
 end

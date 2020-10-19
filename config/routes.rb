@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => "/ckeditor"
 
+  devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: "omniauth_callbacks"}
+
   scope "(:locale)", locale: /en|vi/ do
     root "static_pages#home"
 
@@ -33,7 +35,7 @@ Rails.application.routes.draw do
       resources :topics
     end
 
-    devise_for :users, controllers: {
+    devise_for :users, skip: :omniauth_callbacks, controllers: {
       sessions: "admin/sessions",
       registrations: "admin/registers",
       passwords: "admin/passwords",
