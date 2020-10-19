@@ -23,7 +23,7 @@ class Topic < ApplicationRecord
     .order("topic_count.num desc")
   end)
   scope :by_topic_name, (lambda do |name|
-    where("name like ?", "#{name}%") if name.present?
+    where("name like ?", "%#{name}%") if name.present?
   end)
   scope :order_name, ->{order name: :asc}
   scope :order_topics_count, ->{order user_topics_count: :desc}

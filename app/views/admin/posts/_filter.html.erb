@@ -11,7 +11,7 @@
     </div>
     <div class="col-2">
       <%= f.label :status %>
-      <%= f.select :status_eq, options_for_select(Post.statuses, params[:status]), {prompt:true}, {class: "form-control"} %>
+      <%= f.select :status_eq, options_for_select(Post.statuses, params.dig(:q, :status_eq)), {prompt:true}, {class: "form-control"} %>
     </div>
     <div class="col-2">
       <%= f.label :topic_id %>

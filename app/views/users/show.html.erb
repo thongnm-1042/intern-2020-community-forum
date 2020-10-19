@@ -77,8 +77,7 @@
   </div>
   <hr>
   <div class="col-md-12">
-    <%= render "shared/search_bar", path: user_path,
-      select_type_label: t(".topics"), name_type: t(".title") %>
+    <%= render "posts/search", path: user_path %>
     <% if @posts.present? %>
       <div class="post-list">
         <%= render @posts %>

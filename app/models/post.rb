@@ -19,7 +19,7 @@ class Post < ApplicationRecord
   ransack_alias :post, :title_or_content
 
   ransacker :updated_at, type: :date do
-    Arel.sql("date(updated_at)")
+    Arel.sql("date(posts.updated_at)")
   end
 
   belongs_to :user, counter_cache: :posts_count
@@ -116,6 +116,15 @@ class Post < ApplicationRecord
         by_topics(topic_ids).or(by_users(user_ids)).on
       else
         user.posts.on
+      end
+    end
+
+    def ransackable_attributes auth_object = nil
+      if auth_object.eql? :admin
+        super
+      else
+        super & %w(title content status topic_id user_id created_at
+                   updated_at post)
       end
     end
   end
