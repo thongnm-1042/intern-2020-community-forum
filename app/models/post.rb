@@ -32,6 +32,7 @@ class Post < ApplicationRecord
   after_save :set_off_date
 
   after_commit :notify, on: %i(create update)
+  after_commit :client_notify, on: :update
 
   has_many :post_marks, dependent: :destroy
   has_many :mark_users, through: :post_marks, source: :user
@@ -93,9 +94,9 @@ class Post < ApplicationRecord
 
   def set_off_date
     if off? && status_before_last_save != status
-      update off_date: Time.zone.now
+      update_columns off_date: Time.zone.now
     elsif on? && status_before_last_save == "off"
-      post_reports.destroy_all
+      post_reports.delete_all
     end
   end
 
@@ -141,7 +142,10 @@ class Post < ApplicationRecord
     attributes[:name].blank?
   end
 
-  def get_action notify
+  def load_action
+    notify_id = editor_id.presence || user_id
+    notify = Notification.create post_id: id, user_id: notify_id
+
     if transaction_include_any_action?([:create])
       notify.created!
     elsif transaction_include_any_action?([:update])
@@ -152,21 +156,51 @@ class Post < ApplicationRecord
   end
 
   def notify
-    notify_id = editor_id.presence || user_id
-    notify = Notification.create(post_id: id, user_id: notify_id)
-    get_action notify
+    load_action
+
     User.admin.each do |user|
       ActionCable.server.broadcast "notification_channel_#{user.id}", content:
         {notification_html: notification_html, count: Notification.uncheck.size}
     end
   end
 
+  def client_notify
+    return if previous_changes[:status].blank?
+
+    @current_user = User.find_by id: user_id
+    ActionCable.server
+               .broadcast "client_notification_channel_#{user_id}",
+                          content:
+                            {
+                              notification_html: client_notification_html
+                            }
+  end
+
   def notification_html
     @notify = Notification.includes :user, :post
     AdminController.render(
       partial: "admin/notifications/notification_center",
-      locals: {notifications:
-        @notify.order_created_at.take(Settings.user.validates.page)},
+      locals: {
+        notifications: @notify.order_created_at
+                              .take(Settings.user.validates.page)
+      },
+      formats: [:html]
+    )
+  end
+
+  def client_notification_html
+    @notify = @current_user.notifications.includes(:user, :post)
+                           .updated
+
+    ApplicationController.render(
+      partial: "notifications/notifications",
+      locals:
+        {
+          notifications: @notify.order_created_at
+                                .take(Settings.user.validates.page),
+          uncheck_count: @current_user.notifications
+                                      .uncheck.updated.count
+        },
       formats: [:html]
     )
   end

@@ -70,6 +70,12 @@
           <% end %>
         </ul>
       </div>
+      <%= hidden_field :current_user, :id %>
+      <div id="client-notification">
+        <%= render "notifications/notifications",
+          notifications: load_all_notifications,
+          uncheck_count: load_uncheck_notification_count %>
+      </div>
     </div>
   </nav>
 </div>
