@@ -508,3 +508,6 @@ en:
       post: "This post"
       info: "has vi phạm bản quyền vì những lí do sau"
       warning: "We will block your post !"
+  notifications:
+    notification:
+      content: "Your post with title %{title} has been changed to %{status} by admin"

@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale, :load_right_sidebar
 
+  helper_method :load_all_notifications, :load_uncheck_notification_count
+
   def find_user
     @user = User.find_by id: params[:user_id]
     return if @user
@@ -49,5 +51,16 @@ class ApplicationController < ActionController::Base
                                       .includes(:trackable)
                                       .order_created_at
                                       .limit Settings.acts.per_page_sidebar
+  end
+
+  def load_all_notifications
+    current_user.notifications.includes(:user, :post)
+                .updated
+                .order_created_at
+                .take Settings.notifications.page
+  end
+
+  def load_uncheck_notification_count
+    current_user.notifications.uncheck.updated.count
   end
 end

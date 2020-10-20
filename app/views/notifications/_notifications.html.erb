@@ -1,0 +1,22 @@
+<div class="dropdown show notification">
+  <%= link_to "#", class: "dropdown",
+    data: {toggle: "dropdown"} do %>
+    <i class="far fa-bell"></i>
+    <span id="client-notifynumber"><%= uncheck_count %></span>
+  <% end %>
+  <div class="dropdown-menu">
+    <div class="card">
+      <div class="card-header d-flex">
+        <p class="m-0"><b><%= t ".notifications" %></b></p>
+        <%= link_to t(".mark_as_all_read"), "#" %>
+      </div>
+      <div class="card-body">
+        <div class="notification-list">
+          <%= render partial: "notifications/notification", collection: notifications, as: :notification %>
+        </div>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+</div>

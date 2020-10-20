@@ -15,4 +15,16 @@ document.addEventListener('turbolinks:load', () => {
       $('#notification').html(data.content.notification_html)
     }
   });
+
+  consumer.subscriptions.create({channel: "ClientNotificationChannel", user_id: current_user_id }, {
+    connected() {
+
+    },
+    disconnected() {
+
+    },
+    received(data) {
+      $('#client-notification').html(data.content.notification_html)
+    }
+  });
 })
