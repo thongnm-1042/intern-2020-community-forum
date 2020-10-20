@@ -1,33 +1,45 @@
 <aside class="sidebar97269">
   <ul>
-    <li>
+    <% if user_signed_in? %>
+      <li class="user-info">
+        <div class="user-ava">
+          <%= load_user_avatar current_user.url %>
+        </div>
+        <p>
+          <b>
+            <%= link_to current_user.name, user_path(current_user) %>
+          </b>
+        </p>
+      </li>
+    <% end %>
+    <li class="<%= is_active? "static_pages", "home" %>">
       <%= link_to root_path do %>
         <i class="fas fa-home" aria-hidden="true"></i>
         <%= t ".home" %>
       <% end %>
     </li>
-    <li>
+    <li class="<%= is_active? "topics", "index" %>">
       <%= link_to topics_path do %>
         <i class="fas fa-filter" aria-hidden="true"></i>
         <%= t ".topics" %>
       <% end %>
     </li>
-    <li>
+    <li class="<%= is_active? "users", "index" %>">
       <%= link_to users_path do %>
         <i class="fas fa-users" aria-hidden="true"></i>
         <%= t ".users" %>
       <% end %>
     </li>
-    <li>
+    <li class="<%= is_active? "favorites", "index" %>">
       <%= link_to user_favorites_path current_user do %>
         <i class="fas fa-newspaper" aria-hidden="true"></i>
         <%= t ".favorite" %>
       <% end %>
     </li>
-    <li>
+    <li class="<%= is_active? "trends", "index" %>">
       <%= link_to trends_path do %>
         <i class="fas fa-poll"></i>
-        <%= t ".trend" %>
+        <%= t ".ranks" %>
       <% end %>
     </li>
   </ul>

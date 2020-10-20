@@ -4,7 +4,7 @@
       <%= load_user_avatar user %>
     </div>
     <p class="item-name"><%= link_to user.name, user %></p>
-    <span class="followers-count"><%= t ".followers_count",
+    <span class="followers-count" id="followers-count-<%= user.id %>"><%= t ".followers_count",
       count: user.followers.count %></span>
     <div class="follow-user-<%= user.id %>" >
       <%= load_follow_user_partial user %>

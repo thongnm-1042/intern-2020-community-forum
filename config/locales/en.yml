@@ -44,6 +44,7 @@ en:
       users: Users
       favorite: Favorite
       trend: Trend
+      ranks: Ranks
     right_sidebar:
       new_post: New Post
       posts: Posts
@@ -412,6 +413,7 @@ en:
       no_post: You haven't saved any post
       public: Public
       pending: Pending
+      ranks: Ranks
   trends:
     index:
       trends: Trends

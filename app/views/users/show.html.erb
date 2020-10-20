@@ -53,7 +53,7 @@
           </strong>
         </span>
       </p>
-      <p class="relationship-infor-content">
+      <p class="relationship-infor-content" id="relationship-followers">
         <%= render "follower", follow_list: @user.followers,
           path: user_followers_path(@user) %>
       </p>
@@ -69,7 +69,7 @@
           </strong>
         </span>
       </p>
-      <p class="relationship-infor-content">
+      <p class="relationship-infor-content" id="relationship-following">
         <%= render "follower", follow_list: @user.following,
           path: user_followings_path(@user) %>
       </p>
