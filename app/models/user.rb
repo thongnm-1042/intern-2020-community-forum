@@ -37,7 +37,8 @@ class User < ApplicationRecord
   has_many :report_posts, through: :post_reports, source: :post
 
   devise :database_authenticatable, :registerable, :rememberable,
-         :validatable, :confirmable, :lockable, :timeoutable, :recoverable
+         :validatable, :confirmable, :lockable, :timeoutable, :recoverable,
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   validates :name, presence: true,
     length: {maximum: Settings.user.validates.max_name}
@@ -79,6 +80,34 @@ class User < ApplicationRecord
   delegate :url, to: :avatar
 
   class << self
+    def from_omniauth auth
+      result = User.find_by email: auth.info.email
+
+      return result if result
+
+      find_user auth
+    end
+
+    def find_user auth
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 12]
+        user.name = auth.info.name
+        user.avatar = auth.info.image
+        user.image = auth.info.image
+        build_user user
+      end
+    end
+
+    def build_user user
+      user.uid = auth.uid
+      user.provider = auth.provider
+      user.created_at = Time.zone.now
+      user.updated_at = Time.zone.now
+
+      user.skip_confirmation!
+    end
+
     def sort_type sort
       if sort.eql? "created_at"
         order_created_at

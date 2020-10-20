@@ -31,7 +31,7 @@
         <div class="post-details021">
           <div class="post-details021-user">
             <%= link_to post do %>
-              <%= load_user_avatar post.url %>
+              <%= load_user_avatar post.user %>
             <% end %>
             <%= link_to post do %>
               <h5><%= post.title %></h5>
@@ -68,7 +68,7 @@
         <div class="pints-wrapper">
           <div class="left-user3898">
             <%= link_to celeb do %>
-              <%= load_user_avatar celeb.url %>
+              <%= load_user_avatar celeb %>
             <% end %>
           </div> <span class="points-details938">
             <%= link_to celeb do %>

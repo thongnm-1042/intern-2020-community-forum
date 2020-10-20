@@ -9,7 +9,7 @@
 <div id="post-show">
   <div class="post-sidebar">
     <div class="user-ava">
-      <%= load_user_avatar @post.url %>
+      <%= load_user_avatar @post.user %>
     </div>
     <div class="post-like" id="like-post-<%= @post.id %>">
       <% if current_user.like_post? @post %>

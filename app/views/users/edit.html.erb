@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-5">
       <div class="edit-user-avatar" id="user_ava_preview">
-        <%= load_user_avatar @user.url %>
+        <%= load_user_avatar @user %>
         <%= f.label :avatar, t(".upload_avatar"), class: "btn btn-light btn-block" %>
         <%= f.file_field :avatar, accept: Settings.user.image_type_accept %>
       </div>

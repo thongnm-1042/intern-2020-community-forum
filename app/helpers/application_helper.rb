@@ -6,12 +6,14 @@ module ApplicationHelper
     page_title.blank? ? base_title : "#{page_title} | #{base_title}"
   end
 
-  def load_user_avatar avatar
-    if avatar.present?
-      image_tag avatar
-    else
-      image_tag Settings.user.default_avatar
-    end
+  def load_user_avatar user
+    image_url = Settings.user.default_avatar
+
+    image_url = user.avatar.url if user.avatar.url.present?
+
+    image_url = user.image if user.image.present?
+
+    image_tag image_url
   end
 
   def display_error object, object_attr

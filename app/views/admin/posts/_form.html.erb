@@ -22,7 +22,7 @@
         <p>
           <label class="d-block"><%= t "post.edit.post_image" %></label>
           <div id="post_img_preview">
-            <%= load_user_avatar @post.url %>
+            <%= load_user_avatar @post.user %>
           </div>
           <%= f.label :image, t(".upload_image"),
             class: "btn btn-light" %>
