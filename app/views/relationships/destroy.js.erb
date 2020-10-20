@@ -3,4 +3,7 @@
 <% else %>
   $(".follow-user-<%= @user.id %>").html("<%= j render "users/follow", user: @user %>");
   $("#followings_count").html("<%= current_user.following.size %>");
+  $("#followers-count-<%= @user.id %>").html("<%= I18n.t "users.user.followers_count", count: @user.followers.count %>");
+  $("#relationship-followers").html("<%= j render "users/follower", follow_list: current_user.followers, path: user_followers_path(current_user) %>");
+  $("#relationship-following").html("<%= j render "users/follower", follow_list: current_user.following, path: user_followings_path(current_user) %>");
 <% end %>

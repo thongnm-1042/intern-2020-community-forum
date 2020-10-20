@@ -90,4 +90,8 @@ module ApplicationHelper
     end
     safe_join html
   end
+
+  def is_active? control, act
+    params[:controller] == control && params[:action] == act ? "active" : nil
+  end
 end
