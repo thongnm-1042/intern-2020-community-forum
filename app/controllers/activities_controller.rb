@@ -1,7 +1,9 @@
 class ActivitiesController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource
 
-  before_action :authenticate_user!, :find_user, :correct_user, only: :index
+  before_action :find_user, :correct_user, only: :index
 
   def index
     @activities = @user.activities

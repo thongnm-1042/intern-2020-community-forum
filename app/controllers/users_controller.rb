@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource User
 
-  before_action :authenticate_user!
   before_action :find_user, only: %i(edit update show)
   before_action :correct_user, only: %i(edit update)
 

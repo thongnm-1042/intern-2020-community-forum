@@ -1,6 +1,6 @@
-<div class="mr-3">
+<div class="mr-3 card-user-item">
   <%= link_to admin_user_path user.id do %>
-    <%= image_tag user.avatar_url, class: "img-size-50 img-circle" %>
+    <%= load_user_avatar user %>
   <% end %>
   <p class="text-center">
     <%= user.name %>

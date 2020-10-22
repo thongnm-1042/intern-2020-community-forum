@@ -1,6 +1,6 @@
 <%= link_to admin_post_show_notify_path(notification.post.id, notification.id), class: "dropdown-item notification-#{notification.uncheck?}" do %>
-  <div class="media">
-    <%= image_tag notification.user.avatar_url, class: "img-size-50 mr-3 img-circle" %>
+  <div class="media notify-item">
+    <%= load_user_avatar notification.user %>
     <div class="media-body">
       <h3 class="dropdown-item-title">
         <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>

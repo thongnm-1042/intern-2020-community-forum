@@ -1,6 +1,6 @@
-<div class="d-flex algin-items-center">
+<div class="d-flex algin-items-center report-post-item">
   <%= link_to admin_user_path(report.user_id), class: "nav-link active d-inline text-dark p-0 pr-3" do %>
-    <%= image_tag report.user.avatar_url, class: "img-size-50 img-circle" %>
+    <%= load_user_avatar report.user %>
   <% end %>
   <%= link_to admin_user_path(report.user_id), class: "text-dark" do %>
     <%= report.user_name %>
@@ -10,7 +10,11 @@
     </p>
     <hr>
     <p>
-      <%= report.report_reason_content %>
+      <% if report.report_reason_content.present? %>
+        <%= report.report_reason_content %>
+      <% else %>
+        <%= report.report_reason.name %>
+      <% end %>
     </p>
   <% end %>
   <%= link_to admin_posts_path, class: "nav-link active d-inline ml-auto" do %>

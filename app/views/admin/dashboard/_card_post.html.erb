@@ -6,8 +6,8 @@
   <%= link_to admin_post_path post.id do %>
     <div class="row">
       <div class="col-lg-1">
-        <div class="card-body">
-         <%= image_tag post.image_url,class: "img-size-50 mr-3" %>
+        <div class="card-body card-body-img">
+          <%= load_user_avatar post.user %>
         </div>
       </div>
       <div class="col-lg-11">

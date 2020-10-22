@@ -458,6 +458,12 @@ en:
               blank: "is required"
             name:
               blank: "is required"
+            password:
+              validate:
+                lower_case: must contain at least one lowercase letter
+                upper_case: must contain at least one uppercase letter
+                digit: must contain at least one digit
+                special_character: must contain at least one special character
         post:
           attributes:
             title:

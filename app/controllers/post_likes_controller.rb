@@ -1,7 +1,8 @@
 class PostLikesController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource
 
-  before_action :authenticate_user!
   before_action :find_post, only: %i(create destroy)
 
   def create

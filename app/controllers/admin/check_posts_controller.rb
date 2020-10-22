@@ -1,6 +1,8 @@
 class Admin::CheckPostsController < AdminController
   include PostsHelper
 
+  before_action :authenticate_user!
+
   def update
     @posts = Post.includes(:user, :topic).by_ids params[:post_ids]
     @posts.update_all status: params[:commit].downcase
