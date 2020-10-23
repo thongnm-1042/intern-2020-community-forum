@@ -1,4 +1,6 @@
 class Admin::TopicsController < AdminController
+  before_action :authenticate_user!
+
   before_action :load_topic, except: %i(index new create)
 
   add_breadcrumb I18n.t("topic.breadcrumbs.list"), :admin_topics_path
@@ -11,8 +13,6 @@ class Admin::TopicsController < AdminController
     add_breadcrumb I18n.t("topic.breadcrumbs.new")
     @topic = Topic.new
   end
-
-  def show; end
 
   def create
     @topic = Topic.new topic_params

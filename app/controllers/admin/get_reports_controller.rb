@@ -2,7 +2,8 @@ class Admin::GetReportsController < AdminController
   before_action :get_posts
 
   def index
-    @reports = @post.post_reports.includes(:user).order_updated_at
+    @reports = @post.post_reports.includes(:user, :report_reason)
+                    .order_updated_at
     respond_to :js
   end
 

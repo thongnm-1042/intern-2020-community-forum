@@ -1,4 +1,6 @@
 class TrendsController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource Topic, User
 
   def index

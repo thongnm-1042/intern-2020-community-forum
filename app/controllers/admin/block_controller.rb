@@ -1,5 +1,5 @@
 class Admin::BlockController < AdminController
-  before_action :load_user, :admin_user
+  before_action :authenticate_user!, :load_user
 
   def update
     BlockWorker.perform_async @user.id

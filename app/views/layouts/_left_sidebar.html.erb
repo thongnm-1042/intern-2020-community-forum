@@ -1,9 +1,9 @@
 <aside class="sidebar97269">
   <ul>
-    <% if user_signed_in? %>
+    <% if current_user.present? %>
       <li class="user-info">
         <div class="user-ava">
-          <%= load_user_avatar current_user.url %>
+          <%= load_user_avatar current_user %>
         </div>
         <p>
           <b>

@@ -1,7 +1,8 @@
 class PostReportsController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource
 
-  before_action :authenticate_user!
   before_action :find_post, :check_reported_post, only: :create
 
   def create

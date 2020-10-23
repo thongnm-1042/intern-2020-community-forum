@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: %i(index show)
+
   authorize_resource Post
 
-  before_action :authenticate_user!, except: %i(index show)
   before_action :find_post, except: %i(new create index)
   before_action :correct_user, only: %i(edit update destroy)
 

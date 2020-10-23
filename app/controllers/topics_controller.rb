@@ -1,7 +1,9 @@
 class TopicsController < ApplicationController
-  before_action :find_topic, only: :show
+  before_action :authenticate_user!
 
   authorize_resource Topic
+
+  before_action :find_topic, only: :show
 
   def index
     @topics = Topic.by_topic_name(params[:name])

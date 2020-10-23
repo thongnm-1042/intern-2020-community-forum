@@ -1,7 +1,8 @@
 class PostCommentsController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource
 
-  before_action :authenticate_user!
   before_action :load_commentable, only: :create
 
   def create

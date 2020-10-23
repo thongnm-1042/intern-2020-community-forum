@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-lg-4 d-flex align-items-center justify-content-center">
             <div class="form-group">
-              <%= image_tag @user.avatar_url, class: "rounded rounded-circle img-size-100" %>
+              <%= load_user_avatar @user %>
             </div>
           </div>
           <div class="col-lg-8">

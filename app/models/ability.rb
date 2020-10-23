@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize user
-    can :manage, User, role: "member"
+    can :manage, User
 
     return if user.blank?
 

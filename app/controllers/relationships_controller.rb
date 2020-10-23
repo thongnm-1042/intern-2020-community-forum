@@ -1,7 +1,8 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!
+
   authorize_resource
 
-  before_action :authenticate_user!
   before_action :find_user, only: %i(create destroy)
 
   def create

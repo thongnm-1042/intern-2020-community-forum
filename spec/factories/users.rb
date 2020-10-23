@@ -1,5 +1,10 @@
 FactoryBot.define do
   factory :user do
+    trait :set_user do
+        role {role}
+        status {:active}
+        created_at {"2020-09-06 05:48:12"}
+    end
     name {Faker::Movies::HarryPotter.character}
     email {Faker::Internet.email}
     status {Faker::Number.between from: 0, to: 1}
